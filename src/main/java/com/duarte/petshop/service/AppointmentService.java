@@ -38,6 +38,7 @@ public class AppointmentService {
 	
 	public List<Appointment> getAllAppointments(){
 		
+		//Implementar tratamento de exceção
 		return appointmentRepository.findAll();
 	}
 }

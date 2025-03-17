@@ -37,7 +37,8 @@ public class AnimalService {
 	}
 	
 	public List<Animal> getAllAnimals(){
-		
+
+		//Implementar tratamento de exceção
 		return animalRepository.findAll();
 	}
 }
