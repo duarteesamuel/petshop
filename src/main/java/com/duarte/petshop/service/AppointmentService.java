@@ -2,6 +2,7 @@ package com.duarte.petshop.service;
 
 import org.springframework.stereotype.Service;
 
+import com.duarte.petshop.dtos.AppointmentDTO;
 import com.duarte.petshop.repository.AppointmentRepository;
 
 import jakarta.transaction.Transactional;
@@ -14,7 +15,7 @@ public class AppointmentService {
 	private final AppointmentRepository repository;
 	
 	@Transactional
-	public void saveAppointment() {
+	public void saveAppointment(AppointmentDTO dto) {
 		
 	}
 }
