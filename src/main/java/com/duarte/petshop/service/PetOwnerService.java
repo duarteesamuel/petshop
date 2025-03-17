@@ -1,5 +1,7 @@
 package com.duarte.petshop.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.duarte.petshop.dtos.PetOwnerDTO;
@@ -13,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PetOwnerService {
 
-	private final PetOwnerRepository repository;
+	private final PetOwnerRepository ownerRepository;
 	
 	@Transactional
 	public void savePetOwner(PetOwnerDTO dto) {
@@ -26,6 +28,11 @@ public class PetOwnerService {
 						 .telephone(dto.telephone())
 						 .build();
 		
-		repository.save(owner);
+		ownerRepository.save(owner);
+	}
+	
+	public List<PetOwner> getAllOwners(){
+		
+		return ownerRepository.findAll();
 	}
 }

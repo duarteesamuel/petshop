@@ -1,5 +1,7 @@
 package com.duarte.petshop.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.duarte.petshop.dtos.AppointmentDTO;
@@ -32,5 +34,10 @@ public class AppointmentService {
 		
 		appointmentRepository.save(appointment);
 		
+	}
+	
+	public List<Appointment> getAllAppointments(){
+		
+		return appointmentRepository.findAll();
 	}
 }

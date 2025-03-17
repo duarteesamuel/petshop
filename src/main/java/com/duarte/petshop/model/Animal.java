@@ -46,6 +46,7 @@ public class Animal {
 	private LocalDate dateOfBirth;
 	
 	@Enumerated(EnumType.STRING)
+	@NotBlank(message = "The pet's specie must not be empty.")
 	private Species specie;
 	
 	@ManyToOne

@@ -1,5 +1,7 @@
 package com.duarte.petshop.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.duarte.petshop.dtos.AnimalDTO;
@@ -32,5 +34,10 @@ public class AnimalService {
 						.build();
 		
 		animalRepository.save(animal);
+	}
+	
+	public List<Animal> getAllAnimals(){
+		
+		return animalRepository.findAll();
 	}
 }
