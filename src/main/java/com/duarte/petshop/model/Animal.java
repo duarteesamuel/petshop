@@ -1,0 +1,52 @@
+package com.duarte.petshop.model;
+
+import java.time.LocalDate;
+
+import com.duarte.petshop.enums.Species;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name = "animals")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+public class Animal {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@NotBlank(message = "The pet's name must not be empty.")
+	private String name;
+	
+	@Column(name = "date_of_birth")
+	@NotNull(message = "The pet's date of birth is required.")
+	@Past(message = "The pet's date of birth must be in the past.")
+	private LocalDate dateOfBirth;
+	
+	@Enumerated(EnumType.STRING)
+	private Species specie;
+	
+	@OneToMany
+	@JoinColumn(name = "owner_id", nullable = false)
+	private PetOwner petOwner;
+}
