@@ -30,7 +30,8 @@ import lombok.Setter;
 public class Appointment {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.UUID)
+	@Column(name = "appointment_id", nullable = false)
 	private UUID id;
 	
 	@ManyToOne
