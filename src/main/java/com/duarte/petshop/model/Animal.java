@@ -12,7 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -48,7 +48,7 @@ public class Animal {
 	@Enumerated(EnumType.STRING)
 	private Species specie;
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "owner_id", nullable = false)
 	private PetOwner petOwner;
 }
