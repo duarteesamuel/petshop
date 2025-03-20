@@ -48,7 +48,7 @@ public class Appointment {
 	private LocalTime time;
 	
 	@NotBlank(message = "The appointment's reason is required.")
-	@Size(max = 300, message = "The appoiment's description should not pass 300 characteres.")
+	@Size(max = 300, message = "The appointment's description should not pass 300 characteres.")
 	private String description;
 	
 }
