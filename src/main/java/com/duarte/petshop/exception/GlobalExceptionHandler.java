@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
 
         Map<String, Object> body = new LinkedHashMap<>();
 
-        body.put("timestemp", LocalDateTime.now());
+        body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.CONFLICT);
         body.put("erro", "Cpf already exists");
         body.put("message", e.getMessage());
@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
 
         Map<String, Object> body = new LinkedHashMap<>();
 
-        body.put("timestemp", LocalDateTime.now());
+        body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.CONFLICT);
         body.put("erro", "E-mail already exists");
         body.put("message", e.getMessage());
@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
 
         Map<String, Object> body = new LinkedHashMap<>();
 
-        body.put("timestemp", LocalDateTime.now());
+        body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.CONFLICT);
         body.put("error", "Telephone already exists");
         body.put("message", e.getMessage());
