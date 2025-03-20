@@ -33,9 +33,9 @@ public class AnimalService {
 						.petOwner(owner)
 						.build();
 
-		owner.getAnimals().add(animal);
+		owner.getPets().add(animal);
 
-		owner.updateNumbersOfPet();
+		owner.setNumberOfPets(owner.getPets().size());
 
 		animalRepository.save(animal);
 		ownerRepository.save(owner);

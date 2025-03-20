@@ -51,9 +51,7 @@ public class PetOwner {
 	@OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Animal> pets = new ArrayList<>();
 
-	private Integer numberOfPets = 0;
+	private Integer numberOfPets;
 
-	public void updateNumbersOfPet(){
-		this.numberOfPets = pets.size();
-	}
+
 }
