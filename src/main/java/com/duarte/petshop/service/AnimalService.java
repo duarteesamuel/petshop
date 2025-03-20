@@ -24,7 +24,7 @@ public class AnimalService {
 	public void saveAnimal(AnimalDTO dto) {
 		
 		PetOwner owner = ownerRepository.findById(dto.idOwner())
-				.orElseThrow();
+				.orElseThrow(() -> new RuntimeException("PetOwner with id " + dto.idOwner() + " not found!"));
 		
 		Animal animal = Animal.builder()
 						.name(dto.name())
@@ -32,13 +32,16 @@ public class AnimalService {
 						.specie(dto.specie())
 						.petOwner(owner)
 						.build();
-		
+
+		owner.getAnimals().add(animal);
+
+		owner.updateNumbersOfPet();
+
 		animalRepository.save(animal);
+		ownerRepository.save(owner);
 	}
 	
 	public List<Animal> getAllAnimals(){
-
-		//Implementar tratamento de exceção
 		return animalRepository.findAll();
 	}
 }

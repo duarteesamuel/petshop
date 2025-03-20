@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.duarte.petshop.enums.Species;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -46,10 +47,12 @@ public class Animal {
 	private LocalDate dateOfBirth;
 	
 	@Enumerated(EnumType.STRING)
-	@NotBlank(message = "The pet's specie must not be empty.")
+	@NotNull(message = "The pet's specie must not be nullw.")
 	private Species specie;
 	
 	@ManyToOne
 	@JoinColumn(name = "owner_id", nullable = false)
+	@NotNull(message = "The pet must have an owner.")
+	@JsonIgnore
 	private PetOwner petOwner;
 }

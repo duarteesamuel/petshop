@@ -1,11 +1,6 @@
 package com.duarte.petshop.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -14,6 +9,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pet_owner")
@@ -49,5 +47,13 @@ public class PetOwner {
 	@Column(unique = true)
 	@Size(min = 11, max = 11, message = "Invalid phone number. Use format 21xxxxxxxxx.")
 	private String telephone;
-	
+
+	@OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Animal> pets = new ArrayList<>();
+
+	private Integer numberOfPets = 0;
+
+	public void updateNumbersOfPet(){
+		this.numberOfPets = pets.size();
+	}
 }

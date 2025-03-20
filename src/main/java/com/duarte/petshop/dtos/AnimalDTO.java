@@ -13,6 +13,6 @@ import jakarta.validation.constraints.NotNull;
 public record AnimalDTO(
 		@NotBlank String name,
 		@NotNull @JsonFormat(pattern = "dd/MM/yyyy") LocalDate dateOfBirth,
-		@Enumerated(EnumType.STRING) Species specie,
+		@NotNull @Enumerated(EnumType.STRING) Species specie,
 		@NotNull Long idOwner){
 }
