@@ -8,4 +8,7 @@ import com.duarte.petshop.model.PetOwner;
 @Repository
 public interface PetOwnerRepository extends JpaRepository<PetOwner, Long>{
 
+    boolean existsByCpf(String cpf);
+    boolean existsByEmail(String email);
+    boolean existsByTelephone(String telephone);
 }

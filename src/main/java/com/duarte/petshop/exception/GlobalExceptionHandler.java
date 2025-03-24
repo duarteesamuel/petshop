@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
 
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.CONFLICT);
-        body.put("erro", "Cpf already exists");
+        body.put("error", "Cpf already exists");
         body.put("message", e.getMessage());
 
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
@@ -70,7 +70,7 @@ public class GlobalExceptionHandler {
         Map<String, Object> body = new LinkedHashMap<>();
 
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.CONFLICT);
+        body.put("status", HttpStatus.NOT_FOUND);
         body.put("error", "No data found");
         body.put("message", e.getMessage());
 
