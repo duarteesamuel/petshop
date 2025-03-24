@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.CONFLICT);
         body.put("error", "Multiple conflicts found");
-        body.put("", e.getMessage());
+        body.put("messages", e.getErrors());
 
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
