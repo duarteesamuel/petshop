@@ -13,7 +13,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MultipleConflictException.class)
-    public ResponseEntity<Object> handleMultipleConclictException(MultipleConflictException e){
+    public ResponseEntity<Object> handleMultipleConflictException(MultipleConflictException e){
 
         Map<String, Object> body = new LinkedHashMap<>();
 
@@ -76,4 +76,5 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
+
 }

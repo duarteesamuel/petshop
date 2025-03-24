@@ -51,11 +51,16 @@ public class PetOwnerService {
 		ownerRepository.save(owner);
 	}
 
-
 	public List<PetOwner> getAllOwners(){
 
 		return Optional.of(ownerRepository.findAll())
 				.filter(owners -> !owners.isEmpty())
-				.orElseThrow(() -> new PetshopDataNotFound("No records found in the system"));
+				.orElseThrow(() -> new PetshopDataNotFound("No pet owners found in the system."));
+	}
+
+	public PetOwner findOwnerById(Long id){
+
+		return ownerRepository.findById(id)
+				.orElseThrow(() -> new PetshopDataNotFound("Owner with id " + id + " not found."));
 	}
 }

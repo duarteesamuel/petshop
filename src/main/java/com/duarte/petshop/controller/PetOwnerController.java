@@ -4,11 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.duarte.petshop.dtos.PetOwnerDTO;
 import com.duarte.petshop.model.PetOwner;
@@ -38,5 +34,12 @@ public class PetOwnerController {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(ownerService.getAllOwners());
 		
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<PetOwner> getOwnerById(@PathVariable Long id){
+
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(ownerService.findOwnerById(id));
 	}
 }

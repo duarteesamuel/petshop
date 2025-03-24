@@ -1,7 +1,9 @@
 package com.duarte.petshop.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.duarte.petshop.exception.PetshopDataNotFound;
 import org.springframework.stereotype.Service;
 
 import com.duarte.petshop.dtos.AppointmentDTO;
@@ -37,8 +39,10 @@ public class AppointmentService {
 	}
 	
 	public List<Appointment> getAllAppointments(){
-		
-		//Implementar tratamento de exceção
-		return appointmentRepository.findAll();
+
+		return Optional.of(appointmentRepository.findAll())
+				.filter(appointments -> !appointments.isEmpty())
+				.orElseThrow(() -> new PetshopDataNotFound("No veterinary consultations found in the system."));
 	}
+
 }

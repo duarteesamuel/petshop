@@ -1,7 +1,9 @@
 package com.duarte.petshop.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.duarte.petshop.exception.PetshopDataNotFound;
 import org.springframework.stereotype.Service;
 
 import com.duarte.petshop.dtos.AnimalDTO;
@@ -42,6 +44,8 @@ public class AnimalService {
 	}
 	
 	public List<Animal> getAllAnimals(){
-		return animalRepository.findAll();
+		return Optional.of(animalRepository.findAll())
+				.filter(animals -> !animals.isEmpty())
+				.orElseThrow(() -> new PetshopDataNotFound("No pets registered in the system."));
 	}
 }
