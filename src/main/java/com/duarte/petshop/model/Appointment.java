@@ -35,11 +35,13 @@ public class Appointment {
 	@JoinColumn(name = "animal_id", nullable = false)
 	@NotNull(message = "The appointment have must an animal")
 	@JsonManagedReference
+	//Fix issue with Json response
 	private Animal animal;
 
 	@ManyToOne
 	@JoinColumn(name = "veterinary_id", nullable = false)
 	@NotNull(message = "The appointment have must an veterinary")
+	//Fix issue with Json response
 	private Veterinary veterinary;
 	
 	@NotNull(message = "The appointment's date is required.")
