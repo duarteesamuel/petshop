@@ -10,8 +10,8 @@ import jakarta.validation.constraints.NotNull;
 
 public record AppointmentDTO(
 		@NotNull @JsonFormat(pattern = "dd/MM/yyyy") LocalDate date,
-		@NotNull @JsonFormat(pattern = "HH:mm") LocalTime time,
 		@NotBlank String description,
-		Long idAnimal) {
+		@NotNull Long idAnimal,
+		@NotNull Long idVeterinary) {
 
 }

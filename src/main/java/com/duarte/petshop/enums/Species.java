@@ -3,8 +3,6 @@ package com.duarte.petshop.enums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
-@Getter
 public enum Species {
 
 	CANIDEO("Canídeo"),

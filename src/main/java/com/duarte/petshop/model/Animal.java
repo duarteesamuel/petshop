@@ -1,20 +1,14 @@
 package com.duarte.petshop.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.duarte.petshop.enums.Species;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -47,7 +41,7 @@ public class Animal {
 	private LocalDate dateOfBirth;
 	
 	@Enumerated(EnumType.STRING)
-	@NotNull(message = "The pet's specie must not be nullw.")
+	@NotNull(message = "The pet's specie must not be null.")
 	private Species specie;
 	
 	@ManyToOne
@@ -55,4 +49,9 @@ public class Animal {
 	@NotNull(message = "The pet must have an owner.")
 	@JsonIgnore
 	private PetOwner petOwner;
+
+	@OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Appointment> appointmentPet = new ArrayList<>();
+
+	private Integer numberOfAppointments;
 }

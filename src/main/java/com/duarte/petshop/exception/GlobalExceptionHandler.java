@@ -13,7 +13,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MultipleConflictException.class)
-    public ResponseEntity<Object> handleMultipleConflictException(MultipleConflictException e){
+    public ResponseEntity<Object> handleMultipleConflictException(MultipleConflictException e) {
 
         Map<String, Object> body = new LinkedHashMap<>();
 
@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(CpfAlreadyExists.class)
-    public ResponseEntity<Object> handlerCpfAlreadyExists(CpfAlreadyExists e){
+    public ResponseEntity<Object> handlerCpfAlreadyExists(CpfAlreadyExists e) {
 
         Map<String, Object> body = new LinkedHashMap<>();
 
@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(EmailAlreadyExists.class)
-    public ResponseEntity<Object> handlerEmailAlreadyExists(EmailAlreadyExists e){
+    public ResponseEntity<Object> handlerEmailAlreadyExists(EmailAlreadyExists e) {
 
         Map<String, Object> body = new LinkedHashMap<>();
 
@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(TelephoneAlreadyExists.class)
-    public ResponseEntity<Object> handlerTelephoneAlreadyExists(TelephoneAlreadyExists e){
+    public ResponseEntity<Object> handlerTelephoneAlreadyExists(TelephoneAlreadyExists e) {
 
         Map<String, Object> body = new LinkedHashMap<>();
 
@@ -64,8 +64,21 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(CrmvAlreadyExists.class)
+    public ResponseEntity<Object> handlerCrmvAlreadyExists(CrmvAlreadyExists e) {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.CONFLICT);
+        body.put("error", "Crmv already exists");
+        body.put("message", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(PetshopDataNotFound.class)
-    public ResponseEntity<Object> handlerPetshopDataNotFound(PetshopDataNotFound e){
+    public ResponseEntity<Object> handlerPetshopDataNotFound(PetshopDataNotFound e) {
 
         Map<String, Object> body = new LinkedHashMap<>();
 
@@ -77,4 +90,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(PetshopException.class)
+    public ResponseEntity<Object> handlerPetshopException(PetshopException e) {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.BAD_REQUEST);
+        body.put("error", "Maximum number of scheduled appointments");
+        body.put("message", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
 }
