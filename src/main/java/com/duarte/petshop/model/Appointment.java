@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -45,6 +46,7 @@ public class Appointment {
 	private Veterinary veterinary;
 	
 	@NotNull(message = "The appointment's date is required.")
+	@FutureOrPresent(message = "the date of the appointment must be in the present or future.")
 	@Column(name = "appointment_date", nullable = false)
 	private LocalDate date;
 	
