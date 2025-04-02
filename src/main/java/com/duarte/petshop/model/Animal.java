@@ -8,6 +8,7 @@ import com.duarte.petshop.enums.Species;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -51,6 +52,7 @@ public class Animal {
 	private PetOwner petOwner;
 
 	@OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference("animal-appointments")
 	private List<Appointment> appointmentPet = new ArrayList<>();
 
 	private Integer numberOfAppointments;

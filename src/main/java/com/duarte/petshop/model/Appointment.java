@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.UUID;
 
 import com.duarte.petshop.enums.AppointmentStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -34,14 +35,13 @@ public class Appointment {
 	@ManyToOne
 	@JoinColumn(name = "animal_id", nullable = false)
 	@NotNull(message = "The appointment have must an animal")
-	@JsonManagedReference
-	//Fix issue with Json response
+	@JsonBackReference("animal-appointments")
 	private Animal animal;
 
 	@ManyToOne
 	@JoinColumn(name = "veterinary_id", nullable = false)
 	@NotNull(message = "The appointment have must an veterinary")
-	//Fix issue with Json response
+	@JsonBackReference("veterinary-appointments")
 	private Veterinary veterinary;
 	
 	@NotNull(message = "The appointment's date is required.")
