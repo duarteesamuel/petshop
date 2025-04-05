@@ -3,6 +3,7 @@ package com.duarte.petshop.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import com.duarte.petshop.enums.AppointmentStatus;
 import com.duarte.petshop.exception.PetshopDataNotFound;
@@ -23,28 +24,32 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AppointmentService {
-	
+
 	private final AppointmentRepository appointmentRepository;
 	private final AnimalRepository animalRepository;
 	private final VeterinaryRepository veterinaryRepository;
-	
+
 	@Transactional
 	public void saveAppointment(AppointmentDTO dto) {
 
 		Animal animal = animalRepository.findById(dto.idAnimal())
-													.orElseThrow(
-															() -> new PetshopDataNotFound("Animal with id " + dto.idAnimal() + " not found.")
-													);
+				.orElseThrow(
+						() -> new PetshopDataNotFound("Animal with id " + dto.idAnimal() + " not found.")
+				);
 
 		Veterinary veterinary = veterinaryRepository.findById(dto.idVeterinary())
-													.orElseThrow(() -> new PetshopDataNotFound("Veterinary with id " + dto.idVeterinary() + " not found."));
+				.orElseThrow(() -> new PetshopDataNotFound("Veterinary with id " + dto.idVeterinary() + " not found."));
 
 
 		LocalDate appointmentDate = dto.date();
 		long scheduledAppointments = appointmentRepository.countByVeterinaryAndDate(veterinary, appointmentDate);
 
-		if(scheduledAppointments > 3){
+		if(scheduledAppointments > 3) {
 			throw new PetshopException("The Veterinarian with the id " + dto.idVeterinary() + " reached the maximum number of 3 consultations for the day.");
+		}
+
+		if(appointmentDate.isBefore(LocalDate.now())){
+			throw new PetshopException("Date cannot be in the past");
 		}
 
 		Appointment appointment = Appointment.builder()
@@ -59,16 +64,34 @@ public class AppointmentService {
 
 		animal.getAppointmentPet().add(appointment);
 		animal.setNumberOfAppointments(animal.getAppointmentPet().size());
-		
+
 		appointmentRepository.save(appointment);
 		animalRepository.save(animal);
 	}
-	
-	public List<Appointment> getAllAppointments(){
+
+	public List<Appointment> getAllAppointments() {
 
 		return Optional.of(appointmentRepository.findAll())
 				.filter(appointments -> !appointments.isEmpty())
 				.orElseThrow(() -> new PetshopDataNotFound("No veterinary consultations found in the system."));
+	}
+
+	@Transactional
+	public void cancelAppointment(Long id){
+
+		Appointment setAppointment = findAppointmentByID(id);
+
+		setAppointment.setStatus(AppointmentStatus.CANCELED);
+
+		appointmentRepository.save(setAppointment);
+
+	}
+
+	public Appointment findAppointmentByID(Long id){
+
+		return appointmentRepository.findById(id)
+				.orElseThrow(() -> new PetshopDataNotFound("Appointment with id " + id + " not found!"));
+
 	}
 
 }

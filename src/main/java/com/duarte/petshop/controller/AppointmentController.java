@@ -1,14 +1,11 @@
 package com.duarte.petshop.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.duarte.petshop.dtos.AppointmentDTO;
 import com.duarte.petshop.model.Appointment;
@@ -39,5 +36,14 @@ public class AppointmentController {
 		
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(appointmentService.getAllAppointments());
+	}
+
+	@DeleteMapping
+	public ResponseEntity<String> cancelAppointment(@PathVariable Long id){
+
+		appointmentService.cancelAppointment(id);
+
+		return ResponseEntity.status(HttpStatus.OK)
+				.body("Appointment successfully cancelled.");
 	}
 }

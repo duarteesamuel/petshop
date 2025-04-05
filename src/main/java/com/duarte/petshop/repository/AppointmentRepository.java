@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.duarte.petshop.model.Appointment;
 
 @Repository
-public interface AppointmentRepository extends JpaRepository<Appointment, UUID>{
+public interface AppointmentRepository extends JpaRepository<Appointment, Long>{
 
     long countByVeterinaryAndDate(Veterinary veterinary, LocalDate date);
 

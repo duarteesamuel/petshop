@@ -19,6 +19,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static jakarta.persistence.GenerationType.IDENTITY;
+
 @Entity
 @Table(name = "appointments")
 @NoArgsConstructor
@@ -29,9 +31,9 @@ import lombok.Setter;
 public class Appointment {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "appointment_id", nullable = false)
-	private UUID id;
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "animal_id", nullable = false)
